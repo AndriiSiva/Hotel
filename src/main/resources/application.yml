@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      uri:  mongodb://root:root@localhost:27017/example?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9092
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/bookings_project
+    username: root
+    password: root
+
+app:
+  kafka:
+    topicToRead: user-statistics
+    topicToWrite: booking-statistics
+    kafkaMessageGroupId: "kafka-message-group-id"
+
+  jwt:
+    secret: "someSecretKey"
+    tokenExpiration: 3m
+    refreshTokenExpiration: 30m
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa:
+            INFO
+          JpaTransactionManager:
+            DEBUG
+        transaction:
+          INFO
+        interceptor:
+          TRACE
+
+
